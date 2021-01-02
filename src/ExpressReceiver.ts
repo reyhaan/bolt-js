@@ -149,7 +149,7 @@ export default class ExpressReceiver implements Receiver {
       }
     }
 
-    this.app.use(cors({origin: true}));
+    this.app.use(cors(corsOptions));
     this.app.use(this.router);
   }
 
