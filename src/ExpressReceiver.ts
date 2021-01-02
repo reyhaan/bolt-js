@@ -3,7 +3,7 @@
 import { createServer, Server } from 'http';
 import express, { Request, Response, Application, RequestHandler, Router } from 'express';
 import rawBody from 'raw-body';
-import querystring, { stringify } from 'querystring';
+import querystring from 'querystring';
 import crypto from 'crypto';
 import tsscmp from 'tsscmp';
 import { Logger, ConsoleLogger } from '@slack/logger';
