@@ -138,6 +138,17 @@ export default class ExpressReceiver implements Receiver {
       });
     }
 
+    const whitelist = ['https://kalis-bot-ui.web.app/', 'https://kalis.io']
+    const corsOptions = {
+      origin: function (origin: string, callback: Function) {
+        if (whitelist.indexOf(origin) !== -1) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      }
+    }
+
     this.app.use(cors({origin: true}));
     this.app.use(this.router);
   }
