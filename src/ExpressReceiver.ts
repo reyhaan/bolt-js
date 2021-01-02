@@ -8,6 +8,7 @@ import crypto from 'crypto';
 import tsscmp from 'tsscmp';
 import { Logger, ConsoleLogger } from '@slack/logger';
 import { InstallProvider, CallbackOptions, InstallProviderOptions, InstallURLOptions } from '@slack/oauth';
+import cors, { CorsOptions } from 'cors';
 import App from './App';
 import { ReceiverAuthenticityError, ReceiverMultipleAckError } from './errors';
 import { AnyMiddlewareArgs, Receiver, ReceiverEvent } from './types';
@@ -137,6 +138,18 @@ export default class ExpressReceiver implements Receiver {
       });
     }
 
+    const whitelist = ['https://kalis-bot-ui.web.app/', 'https://kalis.io']
+    const corsOptions: CorsOptions = {
+      origin: (requestOrigin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+        if (whitelist.indexOf(requestOrigin ? requestOrigin : '') !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      }
+    };
+
+    this.app.use(cors(corsOptions));
     this.app.use(this.router);
   }
 
