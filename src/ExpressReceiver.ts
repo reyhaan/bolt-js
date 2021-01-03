@@ -138,17 +138,6 @@ export default class ExpressReceiver implements Receiver {
       });
     }
 
-    // const whitelist = ['https://kalis-bot-ui.web.app', 'https://us-central1-kalis-bot-ui.cloudfunctions.net', 'https://kalis.io']
-    // const corsOptions: CorsOptions = {
-    //   origin: (requestOrigin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-    //     if (whitelist.indexOf(requestOrigin ? requestOrigin : '') !== -1) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error('Not allowed by CORS'));
-    //     }
-    //   }
-    // };
-
     this.app.use(cors({origin: [/kalis-bot-ui\.web\.app/, /kalis-bot-ui\.cloudfunctions\.net/, /kalis\.io/]}));
     this.app.use(this.router);
   }
