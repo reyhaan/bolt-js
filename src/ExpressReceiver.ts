@@ -8,7 +8,7 @@ import crypto from 'crypto';
 import tsscmp from 'tsscmp';
 import { Logger, ConsoleLogger } from '@slack/logger';
 import { InstallProvider, CallbackOptions, InstallProviderOptions, InstallURLOptions } from '@slack/oauth';
-import cors, { CorsOptions } from 'cors';
+import cors from 'cors';
 import App from './App';
 import { ReceiverAuthenticityError, ReceiverMultipleAckError } from './errors';
 import { AnyMiddlewareArgs, Receiver, ReceiverEvent } from './types';
